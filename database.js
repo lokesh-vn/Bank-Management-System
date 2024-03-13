@@ -34,9 +34,12 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/login.html');
 });
 
-app.post('/index', (req, res) => {});
+// app.post('/main', (req, res) => {});
 
 //Routes
+
+//Route for adding register values from register table
+
 app.post('/register', (req, res) => {
     const name = req.body.name;
     const email = req.body.email;
@@ -63,6 +66,7 @@ app.post('/register', (req, res) => {
     });
 });
 
+//Route for retreiving register values from register table
 app.post('/login', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
@@ -76,13 +80,41 @@ app.post('/login', (req, res) => {
         } else {
             if (results.length > 0) {
                 //res.send('Login successful'); // User found, login successful
-                res.redirect('/index.html'); 
+                res.redirect('/main.html'); 
             } else {
                 res.send('Invalid email or password'); // No user found with provided credentials
             }
         }
     });
 });
+
+// Route for submitting bank details
+app.post('/bank-d', (req, res) => {
+    const { code, name, address } = req.body;
+    const query = 'INSERT INTO bank (code, name, address) VALUES (?, ?, ?)';
+    connection.query(query, [code, name, address], (err, results) => {
+      if (err) {
+        console.error('Error submitting bank details:', err);
+        res.status(500).send('Error Storing values due to Duplicate Entry');
+        return;
+      }
+    //   res.status(200).send('Bank details submitted successfully');
+        res.redirect('/bank-d.html');
+    });
+  });
+  
+  // Route for fetching all bank details
+  app.get('/bank-dr', (req, res) => {
+    const query = 'SELECT * FROM bank';
+    connection.query(query, (err, results) => {
+      if (err) {
+        console.error('Error fetching bank details:', err);
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+      res.json(results);
+    });
+  });
 
 // To Display the stored register values
 // connection.query("select * from register", (err,result,fields)=>{
