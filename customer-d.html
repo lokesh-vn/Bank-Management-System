@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Details</title>
+    <style>
+        /* Styles */
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        }
+
+        .container {
+            max-width: 1500px;
+            width: 100%;
+            height: 100%;
+            max-height: 1000px;
+            background-color: #fff;
+            padding: 25px 30px;
+            border-radius: 5px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        .container .title {
+            font-size: 25px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .container .title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 330px;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #71e6bb, #9b59b6);
+        }
+
+        .content form .user-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 20px 0 12px 0;
+        }
+
+        form .user-details .input-box {
+            margin-bottom: 15px;
+            width: calc(100% / 2 - 20px);
+        }
+
+        form .input-box span.details {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .user-details .input-box input {
+            height: 45px;
+            width: 100%;
+            outline: none;
+            font-size: 16px;
+            border-radius: 5px;
+            padding-left: 15px;
+            border: 1px solid #ccc;
+            border-bottom-width: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .user-details .input-box input:focus,
+        .user-details .input-box input:valid {
+            border-color: #9b59b6;
+        }
+
+        form .gender-details .gender-title {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        form .category {
+            display: flex;
+            width: 80%;
+            margin: 14px 0;
+            justify-content: space-between;
+        }
+
+        form .category label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        form .category label .dot {
+            height: 18px;
+            width: 18px;
+            border-radius: 50%;
+            margin-right: 10px;
+            background: #d9d9d9;
+            border: 5px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        #dot-1:checked~.category label .one,
+        #dot-2:checked~.category label .two,
+        #dot-3:checked~.category label .three {
+            background: #9b59b6;
+            border-color: #d9d9d9;
+        }
+
+        form input[type="radio"] {
+            display: none;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            /* Added margin for spacing */
+        }
+
+        .button {
+            height: 45px;
+            width: 48%;
+        }
+
+        .button input {
+            height: 100%;
+            width: 100%;
+            border-radius: 5px;
+            background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .button input:hover {
+            background: linear-gradient(-135deg, #9b59b6, #71b7e6);
+        }
+
+        .button-1 {
+            height: 45px;
+            width: 48%;
+        }
+
+        .button-1 input {
+            height: 100%;
+            width: 100%;
+            border-radius: 5px;
+            background: linear-gradient(-135deg, #9b59b6, #71b7e6);
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .button-1 input:hover {
+            background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+        }
+
+        /* Dropdown Styles */
+        .dropdown {
+            position: absolute;
+            top: 20px;
+            right: 55px;
+            z-index: 1;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 90px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 8px 10px;
+            /* font-size: 20px; */
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown button {
+            background-color: transparent;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            border-radius: 5px;
+        }
+
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            /* Added margin for spacing */
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 4px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Media queries */
+        @media(max-width: 584px) {
+            .container {
+                max-width: 100%;
+            }
+
+            form .user-details .input-box {
+                margin-bottom: 15px;
+                width: 100%;
+            }
+
+            form .category {
+                width: 100%;
+            }
+
+            .content form .user-details {
+                max-height: 300px;
+                overflow-y: scroll;
+            }
+
+            .user-details::-webkit-scrollbar {
+                width: 5px;
+            }
+        }
+
+        @media(max-width: 459px) {
+            .container .content .category {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">Updation of Customer Details</div>
+        <div class="content">
+            <form id="updateForm" action="/customer-d" method="post">
+                <div class="user-details">
+                    <div class="input-box">
+                        <span class="details">SSN</span>
+                        <input type="number" name="ssn" placeholder="Enter Customer SSN" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Name</span>
+                        <input type="text" name="name" placeholder="Enter Customer Name">
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Phone Number</span>
+                        <input type="number" name="phone" placeholder="Enter Customer Phone number">
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Address</span>
+                        <input type="text" name="address" placeholder="Enter Customer Address">
+                    </div>
+                </div>
+                <div class="button-container">
+                    <div class="button">
+                        <input type="submit" value="Update">
+                    </div>
+            </form>
+            <div class="button-1">
+                <input type="button" value="View" onclick="fetchData()">
+            </div>
+        </div>
+        <table id="customerTable" style="display: none;">
+            <thead>
+                <tr>
+                    <th>SSN</th>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody id="customerTableBody">
+            </tbody>
+        </table>
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn">☰</button>
+        <div class="dropdown-content">
+            <a href="./main.html">Home</a>
+            <a href="./bank-d.html">Bank</a>
+            <a href="./branch-d.html">Branch</a>
+            <a href="#">Account</a>
+            <a href="#">Loans</a>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        document.getElementById('updateForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Get form data
+            const formData = new FormData(this);
+
+            // Convert form data to JSON object
+            const jsonObject = {};
+            formData.forEach((value, key) => {
+                jsonObject[key] = value;
+            });
+
+            // Send AJAX request to update endpoint
+            fetch('/customer-d', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json' // Set content type to JSON
+                },
+                body: JSON.stringify(jsonObject) // Convert JSON object to string
+            })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Update successful');
+                        fetchData(); // Fetch updated data to refresh the table
+                    } else {
+                        console.error('Update failed');
+                    }
+                })
+                .catch(error => console.error('Error updating data:', error));
+        });
+
+
+        function fetchData() {
+            fetch('/customer-dr')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById('customerTableBody');
+                    tableBody.innerHTML = '';
+                    const table = document.getElementById('customerTable');
+                    table.style.display = 'table';
+                    data.forEach(row => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                     <td>${row.ssn}</td>
+                     <td>${row.name}</td>
+                     <td>${row.phone}</td>
+                     <td>${row.address}</td>
+                  `;
+                        tableBody.appendChild(tr);
+                    });
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+    </script>
+</body>
+
+</html>

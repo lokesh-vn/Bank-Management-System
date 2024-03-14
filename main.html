@@ -16,7 +16,7 @@
         header {
             width: 100%;
             height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2)), url('./img/bg.jpg');
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4)), url('./img/bg.jpg');
             background-size: cover;
             font-family: "Kanit", sans-serif;
         }
@@ -32,6 +32,7 @@
 
         .logo {
             font-size: 2em;
+            margin-right: 500px;
             letter-spacing: 2px;
             color: white;
         }
@@ -51,7 +52,7 @@
             width: 30%;
         }
 
-        .register a {
+        /* .register a {
             text-decoration: none;
             color: white;
             padding: 10px 20px;
@@ -64,11 +65,12 @@
         .register a:hover {
             background: transparent;
             border: 1px solid blue;
-        }
+        } */
 
         .h-txt {
-            max-width: 600px;
+            max-width: 800px;
             position: absolute;
+            margin-top: 35px;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -77,14 +79,16 @@
         }
 
         .h-txt span {
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             font-weight: normal;
             font-size: 2em;
         }
 
         .h-txt h1 {
-            font-size: 3.8rem;
-            font-weight:500;
+            margin-top: -5px;
+            font-size: 3.8em;
+            letter-spacing: 1px;
+            font-weight:400;
         }
 
         .h-txt a {
@@ -105,10 +109,16 @@
             border: 1px solid blue;
         }
 
+        p{
+            font-size: 25px;
+            letter-spacing: 0px;
+        }
+
         footer{
             color: white;
             background: rgb(26, 25, 25);
             text-align: center;
+            padding: 5px;
             letter-spacing: 1px;
         }
     </style>
@@ -123,20 +133,21 @@
             </div>
             <div class="menu">
                 <a href="./bank-d.html">Bank</a>
-                <a href="#">Branch</a>
-                <a href="#">Customer</a>
+                <a href="./branch-d.html">Branch</a>
+                <a href="./customer-d.html">Customer</a>
                 <a href="#">Account</a>
                 <a href="#">Loans</a>
             </div>
-            <div class="register">
+            <!-- <div class="register">
                 <a href="register.html">Register</a>
-            </div>
+            </div> -->
         </nav>
         <section class="h-txt">
             <span>Welcome Back to</span>
             <h1>Banking Management System</h1>
+            <p>A place to maintain and manage your database</p>
             <br>
-            <a href="login.html">Login</a>
+            <!-- <a href="login.html">Login</a> -->
         </section>
     </header>
 </body>

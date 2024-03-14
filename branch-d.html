@@ -3,7 +3,7 @@
 
 <head>
    <meta charset="UTF-8">
-   <title>Bank Details</title>
+   <title>Branch Details</title>
    <style>
       /* Styles */
 
@@ -49,7 +49,7 @@
          left: 0;
          bottom: 0;
          height: 3px;
-         width: 326px;
+         width: 330px;
          border-radius: 5px;
          background: linear-gradient(135deg, #71e6bb, #9b59b6);
       }
@@ -278,21 +278,21 @@
 
 <body>
    <div class="container">
-      <div class="title">Insertion into Bank Details</div>
+      <div class="title">Insertion to Branch Details</div>
       <div class="content">
-         <form action="/bank-d" method="post">
+         <form action="/branch-d" method="post">
             <div class="user-details">
                <div class="input-box">
-                  <span class="details">Code</span>
-                  <input type="number" name="code" placeholder="Enter Bank Code" required>
-               </div>
-               <div class="input-box">
-                  <span class="details">Name</span>
-                  <input type="text" name="name" placeholder="Enter Bank Name" required>
+                  <span class="details">Number</span>
+                  <input type="number" name="branch_no" placeholder="Enter Branch Number" required>
                </div>
                <div class="input-box">
                   <span class="details">Address</span>
-                  <input type="text" name="address" placeholder="Enter Bank Address" required>
+                  <input type="text" name="address" placeholder="Enter Branch Address" required>
+               </div>
+               <div class="input-box">
+                  <span class="details">Code</span>
+                  <input type="number" name="code" placeholder="Enter Branch Code" required>
                </div>
             </div>
             <div class="button-container">
@@ -304,15 +304,15 @@
             <input type="button" value="View" onclick="fetchData()">
          </div>
       </div>
-         <table id="bankTable" style="display: none;">
+         <table id="branchTable" style="display: none;">
             <thead>
                <tr>
-                  <th>Code</th>
-                  <th>Name</th>
+                  <th>Branch Number</th>
                   <th>Address</th>
+                  <th>Code</th>
                </tr>
             </thead>
-            <tbody id="bankTableBody">
+            <tbody id="branchTableBody">
             </tbody>
          </table>
       </div>
@@ -320,7 +320,7 @@
          <button class="dropbtn">☰</button>
          <div class="dropdown-content">
             <a href="./main.html">Home</a>
-            <a href="./branch-d.html">Branch</a>
+            <a href="./bank-d.html">Bank</a>
             <a href="./customer-d.html">Customer</a>
             <a href="#">Account</a>
             <a href="#">Loans</a>
@@ -330,19 +330,19 @@
 
    <script>
       function fetchData() {
-         fetch('/bank-dr')
+         fetch('/branch-dr')
             .then(response => response.json())
             .then(data => {
-               const tableBody = document.getElementById('bankTableBody');
+               const tableBody = document.getElementById('branchTableBody');
                tableBody.innerHTML = '';
-               const table = document.getElementById('bankTable');
+               const table = document.getElementById('branchTable');
                table.style.display = 'table';
                data.forEach(row => {
                   const tr = document.createElement('tr');
                   tr.innerHTML = `
-                     <td>${row.code}</td>
-                     <td>${row.name}</td>
+                     <td>${row.branch_no}</td>
                      <td>${row.address}</td>
+                     <td>${row.code}</td>
                   `;
                   tableBody.appendChild(tr);
                });
