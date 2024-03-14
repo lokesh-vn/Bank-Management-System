@@ -89,7 +89,7 @@ app.post('/login', (req, res) => {
 });
 
 
-/* For Table Bank in database*/
+/*--------------------------------------------------------------------------For Table Bank in database-------------------------------------------------------------------------------*/
 
 // Route for submitting bank details
 app.post('/bank-d', (req, res) => {
@@ -120,7 +120,7 @@ app.get('/bank-dr', (req, res) => {
 });
 
 
-/* For Table Branch in database*/
+/*------------------------------------------------------------------------For Table Branch in database-------------------------------------------------------------------------------*/
 
 // Route for submitting branch details
 app.post('/branch-d', (req, res) => {
@@ -151,7 +151,7 @@ app.get('/branch-dr', (req, res) => {
 });
 
 
-/* For Table Customer in database*/
+/*---------------------------------------------------------------------For Table Customer in database-------------------------------------------------------------------------------*/
 
 app.post('/customer-d', (req, res) => {
     try {
@@ -210,6 +210,69 @@ app.get('/customer-dr', (req, res) => {
     connection.query(query, (err, results) => {
         if (err) {
             console.error('Error fetching customers:', err);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+        res.json(results);
+    });
+});
+
+
+/*---------------------------------------------------------------------For Table Account in database-------------------------------------------------------------------------------*/
+
+// Route for submitting Account details
+app.post('/account-d', (req, res) => {
+    const { acc_no, balance, type, ssn, branch_no } = req.body;
+    const query = 'INSERT INTO account (acc_no, balance, type, ssn, branch_no) VALUES (?, ?, ?,  ?, ?)';
+    connection.query(query, [acc_no, balance, type, ssn, branch_no], (err, results) => {
+        if (err) {
+            console.error('Error submitting bank details:', err);
+            res.status(500).send('Error Storing values due to Duplicate Entry');
+            return;
+        }
+        //   res.status(200).send('Bank details submitted successfully');
+        res.redirect('/account-d.html');
+    });
+});
+
+// Route for fetching all Account details
+app.get('/account-dr', (req, res) => {
+    const query = 'SELECT * FROM account';
+    connection.query(query, (err, results) => {
+        if (err) {
+            console.error('Error fetching bank details:', err);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+        res.json(results);
+    });
+});
+
+
+/*---------------------------------------------------------------------For Table Loan in database-------------------------------------------------------------------------------*/
+
+// Route for deleting loan details
+app.delete('/loan-d', (req, res) => {
+    const loanNo = req.body.loan_no;
+
+    const query = 'DELETE FROM loan WHERE loan_no = ?';
+    connection.query(query, [loanNo], (err, result) => {
+        if (err) {
+            console.error('Error deleting loan:', err);
+            res.status(500).send('Error deleting loan');
+            return;
+        }
+        console.log('Loan deleted successfully');
+        res.status(200).send('Loan deleted successfully');
+    });
+});
+
+// Route for fetching all Loan details
+app.get('/loan-dr', (req, res) => {
+    const query = 'SELECT * FROM loan';
+    connection.query(query, (err, results) => {
+        if (err) {
+            console.error('Error fetching branch details:', err);
             res.status(500).send('Internal Server Error');
             return;
         }

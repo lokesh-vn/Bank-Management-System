@@ -3,10 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Customer Details</title>
+    <title>Loan Details</title>
     <style>
-        /* Styles */
-
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
         * {
@@ -49,7 +47,7 @@
             left: 0;
             bottom: 0;
             height: 3px;
-            width: 370px;
+            width: 330px;
             border-radius: 5px;
             background: linear-gradient(135deg, #71e6bb, #9b59b6);
         }
@@ -62,6 +60,7 @@
         }
 
         form .user-details .input-box {
+            margin-top: 20px;
             margin-bottom: 15px;
             width: calc(100% / 2 - 20px);
         }
@@ -132,7 +131,6 @@
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
-            /* Added margin for spacing */
         }
 
         .button {
@@ -148,6 +146,7 @@
             border: none;
             color: #fff;
             font-size: 18px;
+            /* margin-top: -10px; */
             font-weight: 500;
             letter-spacing: 1px;
             cursor: pointer;
@@ -170,6 +169,7 @@
             background: linear-gradient(-135deg, #9b59b6, #71b7e6);
             border: none;
             color: #fff;
+            /* margin-top: -10px; */
             font-size: 18px;
             font-weight: 500;
             letter-spacing: 1px;
@@ -230,14 +230,14 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin-top: 30px;
             /* Added margin for spacing */
         }
 
         th,
         td {
             border: 1px solid #ccc;
-            padding: 4px;
+            padding: 5px;
             text-align: center;
         }
 
@@ -281,46 +281,35 @@
 
 <body>
     <div class="container">
-        <div class="title">Updation of Customer Details</div>
+        <div class="title">Deletion from Loan Details</div>
         <div class="content">
-            <form id="updateForm" action="/customer-d" method="post">
+            <form id="deleteForm">
                 <div class="user-details">
                     <div class="input-box">
-                        <span class="details">SSN</span>
-                        <input type="number" name="ssn" placeholder="Enter Customer SSN" required>
-                    </div>
-                    <div class="input-box">
-                        <span class="details">Name</span>
-                        <input type="text" name="name" placeholder="Enter Customer Name">
-                    </div>
-                    <div class="input-box">
-                        <span class="details">Phone Number</span>
-                        <input type="number" name="phone" placeholder="Enter Customer Phone number">
-                    </div>
-                    <div class="input-box">
-                        <span class="details">Address</span>
-                        <input type="text" name="address" placeholder="Enter Customer Address">
+                        <span class="details">Loan Number</span>
+                        <input type="number" id="loanNo" name="loan_no" placeholder="Enter Loan Number" required>
                     </div>
                 </div>
                 <div class="button-container">
                     <div class="button">
-                        <input type="submit" value="Update">
+                        <input type="button" value="Delete" onclick="deleteLoan()">
                     </div>
             </form>
             <div class="button-1">
                 <input type="button" value="View" onclick="fetchData()">
             </div>
         </div>
-        <table id="customerTable" style="display: none;">
+        <table id="bankTable" style="display: none;">
             <thead>
                 <tr>
+                    <th>Loan Number</th>
+                    <th>Amount</th>
+                    <th>Type</th>
                     <th>SSN</th>
-                    <th>Name</th>
-                    <th>Phone Number</th>
-                    <th>Address</th>
+                    <th>Branch Number</th>
                 </tr>
             </thead>
-            <tbody id="customerTableBody">
+            <tbody id="bankTableBody">
             </tbody>
         </table>
     </div>
@@ -330,60 +319,49 @@
             <a href="./main.html">Home</a>
             <a href="./bank-d.html">Bank</a>
             <a href="./branch-d.html">Branch</a>
+            <a href="./customer-d.html">Customer</a>
             <a href="./account-d.html">Account</a>
-            <a href="./loan-d.html">Loans</a>
         </div>
     </div>
     </div>
 
     <script>
-        document.getElementById('updateForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent the default form submission
-
-            // Get form data
-            const formData = new FormData(this);
-
-            // Convert form data to JSON object
-            const jsonObject = {};
-            formData.forEach((value, key) => {
-                jsonObject[key] = value;
-            });
-
-            // Send AJAX request to update endpoint
-            fetch('/customer-d', {
-                method: 'POST',
+        function deleteLoan() {
+            const loanNo = document.getElementById('loanNo').value;
+            fetch('/loan-d', {
+                method: 'DELETE',
                 headers: {
-                    'Content-Type': 'application/json' // Set content type to JSON
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(jsonObject) // Convert JSON object to string
+                body: JSON.stringify({ loan_no: loanNo })
             })
                 .then(response => {
-                    if (response.ok) {
-                        console.log('Update successful');
-                        fetchData(); // Fetch updated data to refresh the table
-                    } else {
-                        console.error('Update failed');
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
                     }
+                    console.log('Loan deleted successfully');
+                    fetchData();
                 })
-                .catch(error => console.error('Error updating data:', error));
-        });
-
-
+                .catch(error => {
+                    console.error('Error deleting loan:', error);
+                });
+        }
         function fetchData() {
-            fetch('/customer-dr')
+            fetch('/loan-dr')
                 .then(response => response.json())
                 .then(data => {
-                    const tableBody = document.getElementById('customerTableBody');
+                    const tableBody = document.getElementById('bankTableBody');
                     tableBody.innerHTML = '';
-                    const table = document.getElementById('customerTable');
+                    const table = document.getElementById('bankTable');
                     table.style.display = 'table';
                     data.forEach(row => {
                         const tr = document.createElement('tr');
                         tr.innerHTML = `
+                     <td>${row.loan_no}</td>
+                     <td>${row.amount}</td>
+                     <td>${row.type}</td>
                      <td>${row.ssn}</td>
-                     <td>${row.name}</td>
-                     <td>${row.phone}</td>
-                     <td>${row.address}</td>
+                     <td>${row.branch_no}</td>
                   `;
                         tableBody.appendChild(tr);
                     });

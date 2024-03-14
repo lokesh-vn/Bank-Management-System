@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Customer Details</title>
+    <title>Account Details</title>
     <style>
         /* Styles */
 
@@ -49,7 +49,7 @@
             left: 0;
             bottom: 0;
             height: 3px;
-            width: 370px;
+            width: 369px;
             border-radius: 5px;
             background: linear-gradient(135deg, #71e6bb, #9b59b6);
         }
@@ -148,6 +148,7 @@
             border: none;
             color: #fff;
             font-size: 18px;
+            margin-top: -10px;
             font-weight: 500;
             letter-spacing: 1px;
             cursor: pointer;
@@ -170,6 +171,7 @@
             background: linear-gradient(-135deg, #9b59b6, #71b7e6);
             border: none;
             color: #fff;
+            margin-top: -10px;
             font-size: 18px;
             font-weight: 500;
             letter-spacing: 1px;
@@ -230,14 +232,14 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin-top: 12px;
             /* Added margin for spacing */
         }
 
         th,
         td {
             border: 1px solid #ccc;
-            padding: 4px;
+            padding: 2px;
             text-align: center;
         }
 
@@ -281,46 +283,51 @@
 
 <body>
     <div class="container">
-        <div class="title">Updation of Customer Details</div>
+        <div class="title">Insertion into Account Details</div>
         <div class="content">
-            <form id="updateForm" action="/customer-d" method="post">
+            <form action="/account-d" method="post">
                 <div class="user-details">
+                    <div class="input-box">
+                        <span class="details">Account Number</span>
+                        <input type="number" name="acc_no" placeholder="Enter Account Number" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Balance</span>
+                        <input type="text" name="balance" placeholder="Enter Account Balance" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Type</span>
+                        <input type="text" name="type" placeholder="Enter Account Type" required>
+                    </div>
                     <div class="input-box">
                         <span class="details">SSN</span>
                         <input type="number" name="ssn" placeholder="Enter Customer SSN" required>
                     </div>
                     <div class="input-box">
-                        <span class="details">Name</span>
-                        <input type="text" name="name" placeholder="Enter Customer Name">
-                    </div>
-                    <div class="input-box">
-                        <span class="details">Phone Number</span>
-                        <input type="number" name="phone" placeholder="Enter Customer Phone number">
-                    </div>
-                    <div class="input-box">
-                        <span class="details">Address</span>
-                        <input type="text" name="address" placeholder="Enter Customer Address">
+                        <span class="details">Branch Number</span>
+                        <input type="number" name="branch_no" placeholder="Enter Branch Number" required>
                     </div>
                 </div>
                 <div class="button-container">
                     <div class="button">
-                        <input type="submit" value="Update">
+                        <input type="submit" value="Insert">
                     </div>
             </form>
             <div class="button-1">
                 <input type="button" value="View" onclick="fetchData()">
             </div>
         </div>
-        <table id="customerTable" style="display: none;">
+        <table id="bankTable" style="display: none;">
             <thead>
                 <tr>
+                    <th>Account Number</th>
+                    <th>Balance</th>
+                    <th>Type</th>
                     <th>SSN</th>
-                    <th>Name</th>
-                    <th>Phone Number</th>
-                    <th>Address</th>
+                    <th>Branch Number</th>
                 </tr>
             </thead>
-            <tbody id="customerTableBody">
+            <tbody id="bankTableBody">
             </tbody>
         </table>
     </div>
@@ -330,60 +337,29 @@
             <a href="./main.html">Home</a>
             <a href="./bank-d.html">Bank</a>
             <a href="./branch-d.html">Branch</a>
-            <a href="./account-d.html">Account</a>
+            <a href="./customer-d.html">Customer</a>
             <a href="./loan-d.html">Loans</a>
         </div>
     </div>
     </div>
 
     <script>
-        document.getElementById('updateForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent the default form submission
-
-            // Get form data
-            const formData = new FormData(this);
-
-            // Convert form data to JSON object
-            const jsonObject = {};
-            formData.forEach((value, key) => {
-                jsonObject[key] = value;
-            });
-
-            // Send AJAX request to update endpoint
-            fetch('/customer-d', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json' // Set content type to JSON
-                },
-                body: JSON.stringify(jsonObject) // Convert JSON object to string
-            })
-                .then(response => {
-                    if (response.ok) {
-                        console.log('Update successful');
-                        fetchData(); // Fetch updated data to refresh the table
-                    } else {
-                        console.error('Update failed');
-                    }
-                })
-                .catch(error => console.error('Error updating data:', error));
-        });
-
-
         function fetchData() {
-            fetch('/customer-dr')
+            fetch('/account-dr')
                 .then(response => response.json())
                 .then(data => {
-                    const tableBody = document.getElementById('customerTableBody');
+                    const tableBody = document.getElementById('bankTableBody');
                     tableBody.innerHTML = '';
-                    const table = document.getElementById('customerTable');
+                    const table = document.getElementById('bankTable');
                     table.style.display = 'table';
                     data.forEach(row => {
                         const tr = document.createElement('tr');
                         tr.innerHTML = `
+                     <td>${row.acc_no}</td>
+                     <td>${row.balance}</td>
+                     <td>${row.type}</td>
                      <td>${row.ssn}</td>
-                     <td>${row.name}</td>
-                     <td>${row.phone}</td>
-                     <td>${row.address}</td>
+                     <td>${row.branch_no}</td>
                   `;
                         tableBody.appendChild(tr);
                     });
