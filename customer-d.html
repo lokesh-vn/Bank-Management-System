@@ -22,7 +22,7 @@
             justify-content: center;
             align-items: center;
             padding: 10px;
-            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+            background: linear-gradient(135deg, #50ce4b, #dad84d);
         }
 
         .container {
@@ -51,7 +51,7 @@
             height: 3px;
             width: 370px;
             border-radius: 5px;
-            background: linear-gradient(135deg, #71e6bb, #9b59b6);
+            background: linear-gradient(135deg, #50ce4b, #dad84d);
         }
 
         .content form .user-details {
@@ -86,7 +86,7 @@
 
         .user-details .input-box input:focus,
         .user-details .input-box input:valid {
-            border-color: #9b59b6;
+            border-color: #59b65c;
         }
 
         form .gender-details .gender-title {
@@ -144,7 +144,7 @@
             height: 100%;
             width: 100%;
             border-radius: 5px;
-            background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+            background: linear-gradient(-135deg, #dad84d, #32b32e);
             border: none;
             color: #fff;
             font-size: 18px;
@@ -155,7 +155,7 @@
         }
 
         .button input:hover {
-            background: linear-gradient(-135deg, #9b59b6, #71b7e6);
+            background: linear-gradient(-135deg, #32b32e, #dad84d);
         }
 
         .button-1 {
@@ -167,7 +167,7 @@
             height: 100%;
             width: 100%;
             border-radius: 5px;
-            background: linear-gradient(-135deg, #9b59b6, #71b7e6);
+            background: linear-gradient(-135deg, #32b32e, #dad84d);
             border: none;
             color: #fff;
             font-size: 18px;
@@ -178,7 +178,7 @@
         }
 
         .button-1 input:hover {
-            background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+            background: linear-gradient(-135deg, #dad84d, #32b32e);
         }
 
         /* Dropdown Styles */
@@ -245,6 +245,30 @@
             background-color: #f2f2f2;
         }
 
+        .prev-next-buttons {
+            position: fixed;
+            bottom: 25px;
+            left: 708px;
+        }
+
+        .prev-next-buttons a {
+            color: #333;
+            font-size: 20px;
+            border: 1px solid #fffdfd;
+            text-decoration: none;
+            border-bottom-width: 2px;
+            transition: all 0.3s ease;
+            padding: 6px 15px;
+            margin-right: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .prev-next-buttons a:hover {
+            color:rgb(0, 106, 255);
+        }
+
         /* Media queries */
         @media(max-width: 584px) {
             .container {
@@ -309,6 +333,10 @@
             </form>
             <div class="button-1">
                 <input type="button" value="View" onclick="fetchData()">
+            </div>
+            <div class="prev-next-buttons">
+                <a class="prev" href="./branch-d.html"> < </a>
+                <a href="./account-d.html"> > </a>
             </div>
         </div>
         <table id="customerTable" style="display: none;">

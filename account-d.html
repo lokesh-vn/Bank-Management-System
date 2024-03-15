@@ -247,6 +247,30 @@
             background-color: #f2f2f2;
         }
 
+        .prev-next-buttons {
+            position: fixed;
+            bottom: 25px;
+            left: 708px;
+        }
+
+        .prev-next-buttons a {
+            color: #333;
+            font-size: 20px;
+            border: 1px solid #fffdfd;
+            text-decoration: none;
+            border-bottom-width: 2px;
+            transition: all 0.3s ease;
+            padding: 6px 15px;
+            margin-right: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .prev-next-buttons a:hover {
+            color:rgb(0, 106, 255);
+        }
+
         /* Media queries */
         @media(max-width: 584px) {
             .container {
@@ -315,6 +339,9 @@
             </form>
             <div class="button-1">
                 <input type="button" value="View" onclick="fetchData()">
+            </div> <div class="prev-next-buttons">
+                <a class="prev" href="./customer-d.html"> < </a>
+                <a href="./loan-d.html"> > </a>
             </div>
         </div>
         <table id="bankTable" style="display: none;">

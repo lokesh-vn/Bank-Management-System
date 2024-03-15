@@ -20,7 +20,7 @@
             justify-content: center;
             align-items: center;
             padding: 10px;
-            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+            background: linear-gradient(135deg, #ee7474, #dc9e46);
         }
 
         .container {
@@ -49,7 +49,7 @@
             height: 3px;
             width: 330px;
             border-radius: 5px;
-            background: linear-gradient(135deg, #71e6bb, #9b59b6);
+            background: linear-gradient(135deg, #ee7474, #dc9e46);
         }
 
         .content form .user-details {
@@ -85,7 +85,7 @@
 
         .user-details .input-box input:focus,
         .user-details .input-box input:valid {
-            border-color: #9b59b6;
+            border-color: #c67338;
         }
 
         form .gender-details .gender-title {
@@ -142,7 +142,7 @@
             height: 100%;
             width: 100%;
             border-radius: 5px;
-            background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+            background: linear-gradient(-135deg, #e6982b, #cc4444);
             border: none;
             color: #fff;
             font-size: 18px;
@@ -154,7 +154,7 @@
         }
 
         .button input:hover {
-            background: linear-gradient(-135deg, #9b59b6, #71b7e6);
+            background: linear-gradient(-135deg, #cc4444, #e6982b);
         }
 
         .button-1 {
@@ -166,7 +166,7 @@
             height: 100%;
             width: 100%;
             border-radius: 5px;
-            background: linear-gradient(-135deg, #9b59b6, #71b7e6);
+            background: linear-gradient(-135deg, #cc4444, #e6982b);
             border: none;
             color: #fff;
             /* margin-top: -10px; */
@@ -178,7 +178,7 @@
         }
 
         .button-1 input:hover {
-            background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+            background: linear-gradient(-135deg, #e6982b, #cc4444);
         }
 
         /* Dropdown Styles */
@@ -245,6 +245,31 @@
             background-color: #f2f2f2;
         }
 
+        /* New styles for navigation buttons */
+        .prev-next-buttons {
+            position: fixed;
+            bottom: 25px;
+            left: 708px;
+        }
+
+        .prev-next-buttons a {
+            color: #333;
+            font-size: 20px;
+            border: 1px solid #fffdfd;
+            text-decoration: none;
+            border-bottom-width: 2px;
+            transition: all 0.3s ease;
+            padding: 6px 15px;
+            margin-right: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .prev-next-buttons a:hover {
+            color:rgb(0, 106, 255);
+        }
+
         /* Media queries */
         @media(max-width: 584px) {
             .container {
@@ -297,6 +322,10 @@
             </form>
             <div class="button-1">
                 <input type="button" value="View" onclick="fetchData()">
+            </div>
+            <div class="prev-next-buttons">
+                <a class="prev" href="./account-d.html"> < </a>
+                <a href="./main.html">🏠</a>
             </div>
         </div>
         <table id="bankTable" style="display: none;">
