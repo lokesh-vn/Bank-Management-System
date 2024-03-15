@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
 
-// MySQL connection
 const connection = mysql8.createConnection({
     host: 'localhost',
     user: 'root',
@@ -35,9 +34,7 @@ app.get('/', (req, res) => {
 });
 
 
-//Routes
-
-/* For Table Register in database*/
+/*-----------------------------------------------------------------------For Table Register in database----------------------------------------------------------------------------*/
 
 //Route for adding register values from register table
 app.post('/register', (req, res) => {
@@ -280,6 +277,8 @@ app.get('/loan-dr', (req, res) => {
     });
 });
 
+/*-------------------------------------------------------------------------End of Queries-------------------------------------------------------------------------------------------*/
+
 // To Display the stored register values
 // connection.query("select * from register", (err,result,fields)=>{
 //     if(err){
@@ -290,5 +289,5 @@ app.get('/loan-dr', (req, res) => {
 
 // Start server
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+    console.log(`Server running on port 127.0.0.1:${port}`);
 });
