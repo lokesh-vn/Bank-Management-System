@@ -21,24 +21,27 @@
             align-items: center;
             justify-content: center;
             background: #4070f4;
+            background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.7)), url('./img/login.jpg');
+            background-size: cover;
         }
 
         .wrapper {
             position: relative;
-            max-width: 430px;
+            max-width: 650px;
             width: 100%;
             background: #fff;
             padding: 34px;
             border-radius: 6px;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-            opacity: 0.9;
+            /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.9); */
+            /* opacity: 0.9; */
+            background-color: transparent ;
         }
 
         .wrapper h2 {
             position: relative;
             font-size: 22px;
             font-weight: 600;
-            color: #333;
+            color: rgb(255, 255, 255);
         }
 
         .wrapper h2::before {
@@ -46,10 +49,10 @@
             position: absolute;
             left: 0;
             bottom: 0;
-            height: 2.8px;
-            width: 137px;
+            height: 2.5px;
+            width: 139px;
             border-radius: 12px;
-            background: #4070f4;
+            background: rgb(238, 202, 136);
         }
 
         .wrapper form {
@@ -68,51 +71,60 @@
             padding: 0 15px;
             font-size: 17px;
             font-weight: 400;
-            color: #333;
+            color: white;
             border: 1.5px solid #C7BEBE;
             border-bottom-width: 2.5px;
+            background-color: transparent;
             border-radius: 6px;
             transition: all 0.3s ease;
         }
 
         .input-box input:focus,
         .input-box input:valid {
-            border-color: #4070f4;
+            border-color: rgb(237, 194, 115);
         }
 
         form .policy {
-            margin-top: 30px;
             display: flex;
             align-items: center;
+            margin-top: 30px;
+            letter-spacing: 0.5px;
         }
 
         form h3 {
-            color: #707070;
+            color: white;
             font-size: 14px;
             font-weight: 500;
             margin-left: 10px;
         }
 
         .input-box.button input {
-            color: #fff;
+            color: black;
+            font-weight: 500;
             letter-spacing: 1px;
             border: none;
-            background: #4070f4;
+            background: rgb(237, 194, 115);
             cursor: pointer;
         }
 
         .input-box.button input:hover {
-            background: #0e4bf1;
+            background: rgb(224, 175, 85);
+        }
+
+        form .text {
+            margin-top: 30px;
         }
 
         form .text h3 {
-            color: #333;
+            color: white;
             width: 100%;
             text-align: center;
+            letter-spacing: 0.5px;
+            font-size: 15px;
         }
 
         form .text h3 a {
-            color: #4070f4;
+            color: rgb(246, 192, 93);
             text-decoration: none;
         }
 
@@ -140,7 +152,7 @@
             </div>
             <div class="policy">
                 <input type="checkbox" required>
-                <h3>I accept all terms & condition</h3>
+                <h3>I accept all terms & conditions</h3>
             </div>
             <div class="input-box button">
                 <input type="submit" value="Register Now">

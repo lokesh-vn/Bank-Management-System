@@ -3,7 +3,7 @@ const mysql8 = require('mysql8');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3000;
+const port = 2024;
 
 const connection = mysql8.createConnection({
     host: 'localhost',
@@ -289,5 +289,5 @@ app.get('/loan-dr', (req, res) => {
 
 // Start server
 app.listen(port, () => {
-    console.log(`Server running on port 127.0.0.1:${port}`);
+    console.log(`Server running on port ${port}`);
 });
